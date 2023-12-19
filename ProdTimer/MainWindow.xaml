@@ -1,0 +1,64 @@
+﻿<Window x:Class="ProdTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProdTimer"
+        mc:Ignorable="d"
+        Title="Productivity Timer" Width="370" WindowStyle="None" Opacity="0.8" AllowsTransparency="True" SizeToContent="Height" MaxHeight="500">
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
+            <StackPanel Margin="-18,0,0,0" Background="White"/>
+        </ItemsPanelTemplate>
+        <Style TargetType="ContextMenu">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property = "Background" Value="Gray"/>
+        </Style>
+    </Window.Resources>
+    <Window.ContextMenu>
+        <ContextMenu Name="MainContextMenu">
+            <MenuItem Header="Close" Click="MenuClose_Click">
+                <MenuItem.Icon>
+                    <Image Height="5" Source="."/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.ContextMenu>
+    <Grid Opacity="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+        <TextBox Name="TimerBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Center" Width="353" Height="87" PreviewMouseDown="TextBox_MouseDown"
+                 FontSize="72" FontFamily="Arial Black" IsReadOnly="True" IsHitTestVisible="true" Grid.ColumnSpan="2" />
+        <Button Name="StartStopResumeButton" Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="170" FontSize="24" Background="#FF73FF67" Click="StartStopResumeButton_Click" Grid.Row="1"/>
+        <Button Name="ResetButton" Content="Reset" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="170" FontSize="24" Background="#FFF67C7C" Click="ResetButton_Click" Grid.Row="1" Grid.Column="1" />
+        <Expander Name="LogExpander" HorizontalAlignment="Center" Height="24" Header="Log" Grid.Row="2" VerticalAlignment="Top" Width="354" Grid.ColumnSpan="2" IsExpanded="False" 
+                  Margin="0,0,0,10" Expanded="LogExpander_Expanded" Collapsed="LogExpander_Collapsed">
+            <Grid Background="#FFE5E5E5">
+                <TextBox Name="LogView" />
+            </Grid>
+        </Expander>
+    </Grid>
+</Window>
